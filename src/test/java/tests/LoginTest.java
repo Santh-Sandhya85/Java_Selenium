@@ -32,15 +32,16 @@ public class LoginTest extends BaseTest {
     public Object[][] invalidLoginData() {
 
         return new Object[][] {
-                {TestConfig.get("SAUCE_USERNAME") + "_invalid", TestConfig.get("SAUCE_PASSWORD")},
-                {TestConfig.get("SAUCE_USERNAME"), TestConfig.get("SAUCE_PASSWORD") + "_invalid"}
+                {"invalid_user", "secret_sauce", "Username and password do not match"},
+                {"locked_out_user", "secret_sauce", "Sorry, this user has been locked out"}
         };
     }
 
     @Test(dataProvider = "invalidLoginData")
     public void invalidLoginTest(
             String username,
-            String password) {
+            String password,
+            String expectedError) {
 
         LoginPage loginPage =
                 new LoginPage(DriverFactory.getDriver());
@@ -49,7 +50,7 @@ public class LoginTest extends BaseTest {
 
         Assert.assertTrue(
                 loginPage.getErrorMessage()
-                        .contains("Username and password do not match")
+                        .contains(expectedError)
         );
     }
 }

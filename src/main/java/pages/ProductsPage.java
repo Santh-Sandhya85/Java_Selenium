@@ -13,6 +13,9 @@ public class ProductsPage {
     private By cart =
             By.className("shopping_cart_link");
 
+        private By cartItemCount =
+            By.className("shopping_cart_badge");
+
     private By menu =
             By.id("react-burger-menu-btn");
 
@@ -25,6 +28,10 @@ public class ProductsPage {
 
     public void addBackpack() {
         driver.findElement(backpack).click();
+    }
+
+    public int getCartItemCount() {
+        return Integer.parseInt(driver.findElement(cartItemCount).getText());
     }
 
     public void openCart() {

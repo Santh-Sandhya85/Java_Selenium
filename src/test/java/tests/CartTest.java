@@ -26,6 +26,9 @@ public class CartTest extends BaseTest {
                 new ProductsPage(DriverFactory.getDriver());
 
         productsPage.addBackpack();
+
+        Assert.assertEquals(productsPage.getCartItemCount(), 1);
+
         productsPage.openCart();
 
         Assert.assertTrue(
@@ -40,5 +43,29 @@ public class CartTest extends BaseTest {
         Assert.assertTrue(
                 cartPage.isBackpackDisplayed()
         );
+
+        Assert.assertEquals(cartPage.getProductName(), "Sauce Labs Backpack");
+    }
+
+    @Test
+    public void checkoutPageTest() {
+        LoginPage loginPage =
+                new LoginPage(DriverFactory.getDriver());
+
+        loginPage.login(
+                TestConfig.get("SAUCE_USERNAME"),
+                TestConfig.get("SAUCE_PASSWORD")
+        );
+
+        ProductsPage productsPage =
+                new ProductsPage(DriverFactory.getDriver());
+        productsPage.addBackpack();
+        productsPage.openCart();
+
+        CartPage cartPage =
+                new CartPage(DriverFactory.getDriver());
+        cartPage.clickCheckout();
+
+        Assert.assertTrue(cartPage.isCheckoutPageDisplayed());
     }
 }

@@ -21,7 +21,15 @@ public class CartPage {
         return driver.findElement(backpack).isDisplayed();
     }
 
+    public String getProductName() {
+        return driver.findElement(backpack).getText();
+    }
+
     public void clickCheckout() {
         driver.findElement(checkout).click();
+    }
+
+    public boolean isCheckoutPageDisplayed() {
+        return driver.getCurrentUrl().contains("checkout-step-one");
     }
 }
