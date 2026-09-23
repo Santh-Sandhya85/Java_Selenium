@@ -5,10 +5,10 @@ describe('SauceDemo Login', () => {
         cy.visit('https://www.saucedemo.com/');
 
         cy.get('#user-name')
-            .type('REMOVED_USERNAME');
+            .type(Cypress.env('sauceUsername'));
 
         cy.get('#password')
-            .type('REMOVED_PASSWORD');
+            .type(Cypress.env('saucePassword'));
 
         cy.get('#login-button')
             .click();

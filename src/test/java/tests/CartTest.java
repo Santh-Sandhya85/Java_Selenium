@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.LoginPage;
 import pages.ProductsPage;
+import utils.TestConfig;
 import utils.DriverFactory;
 
 public class CartTest extends BaseTest {
@@ -17,8 +18,8 @@ public class CartTest extends BaseTest {
                 new LoginPage(DriverFactory.getDriver());
 
         loginPage.login(
-                "REMOVED_USERNAME",
-                "REMOVED_PASSWORD"
+                TestConfig.get("SAUCE_USERNAME"),
+                TestConfig.get("SAUCE_PASSWORD")
         );
 
         ProductsPage productsPage =
@@ -26,6 +27,12 @@ public class CartTest extends BaseTest {
 
         productsPage.addBackpack();
         productsPage.openCart();
+
+        Assert.assertTrue(
+                DriverFactory.getDriver()
+                        .getCurrentUrl()
+                        .contains("cart")
+        );
 
         CartPage cartPage =
                 new CartPage(DriverFactory.getDriver());

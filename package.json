@@ -11,7 +11,8 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "cypress": "^16.1.0"
+    "cypress": "^16.1.0",
+    "dotenv": "^17.2.2"
   },
   "allowScripts": {
     "cypress@16.1.0": true

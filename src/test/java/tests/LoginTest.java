@@ -6,6 +6,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pages.LoginPage;
 import utils.DriverFactory;
+import utils.TestConfig;
 
 public class LoginTest extends BaseTest {
 
@@ -16,8 +17,8 @@ public class LoginTest extends BaseTest {
                 new LoginPage(DriverFactory.getDriver());
 
         loginPage.login(
-                "REMOVED_USERNAME",
-                "REMOVED_PASSWORD"
+                TestConfig.get("SAUCE_USERNAME"),
+                TestConfig.get("SAUCE_PASSWORD")
         );
 
         Assert.assertTrue(
@@ -31,8 +32,8 @@ public class LoginTest extends BaseTest {
     public Object[][] invalidLoginData() {
 
         return new Object[][] {
-                {"REMOVED_INVALID_USERNAME", "REMOVED_INVALID_PASSWORD"},
-                {"REMOVED_USERNAME", "REMOVED_INVALID_PASSWORD"}
+                {TestConfig.get("SAUCE_USERNAME") + "_invalid", TestConfig.get("SAUCE_PASSWORD")},
+                {TestConfig.get("SAUCE_USERNAME"), TestConfig.get("SAUCE_PASSWORD") + "_invalid"}
         };
     }
 
